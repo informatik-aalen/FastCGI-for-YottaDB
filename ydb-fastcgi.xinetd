@@ -1,0 +1,14 @@
+service ydb-fastcgi
+{
+    protocol    = tcp
+    port        = 9999
+    type        = UNLISTED
+    socket_type = stream
+    wait        = no
+    user        = wbantel
+    grou        = wbantel
+    server      = /usr/local/lib/yottadb/r124/mumps
+    server_args = -run FCGI
+    env         = ydb_dir=/home/wbantel/.yottadb ydb_gbldir=/home/wbantel/.yottadb/r1.24_x86_64/g/yottadb.gld ydb_routines=/home/wbantel/.yottadb/r1.24_x86_64/o*(/home/wbantel/.yottadb/r1.24_x86_64/r) ydb_rel=r1.24_x86_64
+    disable     = no
+}

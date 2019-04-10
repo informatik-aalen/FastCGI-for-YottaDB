@@ -1,0 +1,20 @@
+<html>
+<head><title>YottaDB via AJAX</title>
+<script language="JavaScript">
+    function get_data(){
+        var _http = new XMLHttpRequest;
+        _http.open("GET","/ydb/dollarh", true);
+        _http.onreadystatechange = function() {
+            if (_http.readyState === 4)
+                document.getElementById("ausgabe").firstChild.
+                    nodeValue = _http.responseText;
+        };
+        _http.send();
+    }
+</script>
+</head>
+<body onload="window.setInterval(get_data,1000)">
+<h1>$HOROLOG by AJAX</h1>
+$H: <output id="ausgabe"> </output>
+</body>
+</html>

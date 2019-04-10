@@ -1,0 +1,21 @@
+# minimal nxinx-config for YottaDB-FastCGI
+upstream ydb_fcgi_backend {
+    server 127.0.0.1:9999;
+    keepalive 32;
+}
+server {
+    listen         80;
+    listen    [::]:80;
+    server_name    localhost;
+    root /usr/share/nginx/html/ ;
+    index index.html index.htm index.xhtml ;
+    location /ydb/ {
+        fastcgi_pass ydb_fcgi_backend;
+        fastcgi_keep_conn on ;
+        fastcgi_param   QUERY_STRING            $query_string;
+        fastcgi_param   SID                     $cookie_sid;
+        fastcgi_param   DOCUMENT_URI            $document_uri;
+        fastcgi_param   REQUEST_METHOD          $request_method;
+        fastcgi_param   REMOTE_ADDR             $remote_addr;
+    }
+}

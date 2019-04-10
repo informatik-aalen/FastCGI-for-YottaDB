@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html><head><title>SSE with YottaDB</title>
+<script>
+function init() {
+    var source = new EventSource("/ydb/fcgi-sse");
+    source.addEventListener('message',f, false);
+}
+function f(event) {
+    document.getElementById("data").firstChild.nodeValue =
+    event.data;
+}
+</script>
+</head>
+<body onload="init()">
+Data: <div id="data">???</div>
+</body>
+</html>
